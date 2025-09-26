@@ -1,0 +1,10 @@
+import {Routes, Route} from "react-router-dom";
+import Home from "..Pages/Home";
+import Blog from "..Pages/Blog";
+import detalleCarta from "..Pages/detalleCarta";
+import detalleCompra from "..Pages/detalleCompra";
+import Login from "..Pages/Login";
+import magicSingles from "..Pages/magicSingles";
+import pokemonSingles from "..Pages/pokemonSingles";
+import yugiohSingles from "..Pages/yugiohSingles";
+import Perfil from "..Pages/Perfil";
