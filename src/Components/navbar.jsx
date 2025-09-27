@@ -1,14 +1,15 @@
-import NavbarBrand from "react-bootstrap/esm/NavbarBrand";
-import { Navbar, Nav , Container}  from "react-bootstrap/Navbar";
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
 import { Link } from "react-router-dom";
 
 export default function AppNavbar(){
 
     return ( 
-        <Navbar expands="lg" bg="dark" data-bs-theme="dark" className="border-bottom" aria-label= "Main">
+        <Navbar expand="lg" bg="dark" data-bs-theme="dark" className="border-bottom" aria-label="Main">
         <Container>
             <Navbar.Brand as={Link} to="/" >Acople TCG</Navbar.Brand>
-            <Navbar.Toggle aria controls="basic-navbar-nav"/>
+            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="mainNav">
                 <Nav className="ms-auto">
                     <Nav.Link as={Link} to="/Blog">Blog</Nav.Link>
