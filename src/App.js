@@ -1,9 +1,9 @@
 
-import AppNavbar from "./Components/navbar";
-import AppFooter from "./Components/footer";
+import AppNavbar from "./Components/navbar.jsx";
+import AppFooter from "./Components/footer.jsx";
 import './styles/theme.css';
 import { BrowserRouter } from "react-router-dom";
-import AppRouter from "./routes/AppRouter";
+import AppRouter from "./routes/AppRouter.jsx";
 
 export default function App() {
   return (
