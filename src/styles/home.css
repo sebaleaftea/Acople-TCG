@@ -1,0 +1,414 @@
+/* Paleta de colores del proyecto
+    - Azul oscuro: #08415C
+    - Azul medio: #286D8D
+    - Azul claro: #388697
+    - Gris claro: #F5F5F5
+    - Gris medio: #E6E6E6
+    - Gris oscuro: #292525
+    - Naranja brillante: #D97D54
+    - Naranja suave: #EFA58B
+    - Púrpura vibrante: #9A48C9
+    - Púrpura suave: #C597E4
+    - Rosa brillante: #EBBAB9
+    - Rosa suave: #F2D1D1
+    - Amarillo dorado: #DFAC4D
+    - Amarillo suave: #E9DBDB
+*/
+
+/* Logo de la tienda*/
+
+/* Sombra mágica en el logo */
+.logo {
+    height: 180px;
+    width: auto;
+    margin: 0 auto;
+    max-width: 250px;
+    filter: drop-shadow(0 0 10px rgba(223, 172, 77, 0.7));
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 20px rgba(165, 114, 3, 0.9));
+}
+
+
+
+/* --- Estilo de galeria para las cartas --- */
+/* Cards con efecto mágico */
+.cards-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+    padding: 0;
+    list-style: none;
+}
+
+.card-tcg {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empuja el botón al final */
+    background: linear-gradient(160deg, #f5f5f5, #e6e6e6);
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(8,65,92,0.25);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.card-tcg:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 12px 28px rgba(41, 166, 204, 0.4);
+}
+
+/* Imagen arriba */
+.card-tcg .card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    border-bottom: 2px solid #ccc;
+    background: #fff; /* para que todas tengan base uniforme */
+}
+
+/* Contenido flexible */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* para ocupar el alto de la card */
+    padding: 1rem;
+}
+
+/* Bloque de info (título, marca, desc) */
+.card-info {
+    flex-grow: 1; /* ocupa el espacio restante */
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+/* Estilos de textos */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #286d8d;
+}
+
+.card-meta {
+    font-size: 0.9rem;
+    color: #388697;
+}
+
+
+.card-desc {
+    font-size: 0.9rem;
+    color: #292525;
+    margin-top: 0.5rem;
+}
+
+/* Botón fijo abajo */
+.card-link {
+    margin-top: auto; /* fuerza el botón abajo */
+    display: block;
+    padding: 0.6em 1.5em;
+    background: linear-gradient(135deg, #458ae6, #EBBAB9);
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.card-link:hover {
+    background: linear-gradient(135deg, #4e50b6d3, #b02ace);
+    color: #08415C;
+    box-shadow: 0 0 12px rgba(57, 4, 117, 0.7);
+}
+
+/* tweaks responsivo*/
+@media (max-width: 700px) {
+    .cards-gallery {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Aplicacion de conraste */
+/* Títulos con efecto de brillo */
+h1, h2, h3, h4 {
+    color: #e9dbdb;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgb(18, 19, 20);
+}
+
+/* Main con fondo suave */
+main {
+    background: rgba(17, 0, 114, 0.1);
+    backdrop-filter: blur(4px);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+
+/* Imagen para fondo de header stilizada*/
+/* Reset y tipografía mágica */
+body {
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0a577a 0%, #2a4e92 30%, #9a48c9 100%);
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Header con efecto épico */
+header[role=banner] {
+    background-image: url('TopTCG_BANNER.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    /*padding: 60px 0 18%;*/
+    text-align: center;
+    box-shadow: inset 0 -50px 100px rgba(0, 0, 0, 0.6);
+}
+
+/* Contenedor del logo + tagline */
+header[role=banner] .brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* Tagline */
+header[role=banner] .tagline {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    color: #f5f5f5;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+}
+
+/* Nav bar horizontal owo*/
+/* Nav bar mágico */
+/* --- NAVBAR sticky --- */
+nav[aria-label="Navegación principal"] {
+    background: rgba(8,65,92,0.95);
+    padding: 0.8em 0;
+    backdrop-filter: blur(6px);
+    border-top: 2px solid #EBBAB9;
+    border-bottom: 2px solid #EBBAB9;
+    position: sticky;   /* se queda pegada */
+    top: 0;             /* siempre visible arriba */
+    z-index: 1000;
+}
+
+nav[aria-label="Navegación principal"] ul {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav[aria-label="Navegación principal"] li {
+    margin: 0;
+}
+
+nav[aria-label="Navegación principal"] a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.6em 1.2em;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+nav[aria-label="Navegación principal"] a:hover,
+nav[aria-label="Navegación principal"] a:focus {
+    background: linear-gradient(135deg, #c597e4, #cc2983);
+    color: #08415C;
+    box-shadow: 0 0 10px rgba(167, 46, 112, 0.8);
+}
+
+/* Estilos para compra de singles */
+
+.tcg-icons {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.tcg-icons a {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #dde0f7 0%, #7472d4 100%);
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.tcg-icons a:hover {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 10px 25px rgba(235,186,185,0.8);
+}
+
+.tcg-icons img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Asegura que las imágenes se ajusten correctamente */
+    padding: 1px; /* Espaciado interno para que las imágenes no toquen los bordes */
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    background: #08415C;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+    border-top: 2px solid #EBBAB9;
+    font-size: 0.9rem;
+}
+
+/* Estilos para el mini-carrito sidebar */
+#mini-carrito-lista div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.7rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+    background: #f9f9f9;
+    border-radius: 6px;
+    padding: 0.7rem 0.5rem;
+}
+#mini-carrito-lista strong {
+    color: #08415C;
+    font-size: 1.05rem;
+}
+#mini-carrito-lista small {
+    color: #388697;
+    font-size: 0.95rem;
+}
+#mini-carrito-lista button[title='Eliminar'] {
+    background: #CC2936;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#mini-carrito-lista button[title='Eliminar']:hover {
+    background: #a81e2a;
+}
+
+/* Fondo semitransparente para el mini-carrito sidebar */
+#mini-carrito {
+    background: rgba(255,255,255,0.95) !important;
+    /* El !important asegura que sobrescriba el inline style */
+}
+
+/* Mostrar el precio unitario en cada producto del mini-carrito */
+#mini-carrito-lista .mini-carrito-item-precio-unitario {
+    color: #388697;
+    font-size: 0.97rem;
+    margin-left: 2px;
+    display: block;
+}
+
+/* --- Buscador refinado --- */
+form[aria-label="Buscador de cartas"] {
+    margin: 2rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    max-width: 600px;
+}
+
+form[aria-label="Buscador de cartas"] label {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: #f2d1d1;
+    text-shadow: 0 1px 2px #000;
+}
+
+form[aria-label="Buscador de cartas"] input[type="search"] {
+    flex: 1;
+    padding: 0.7em 1em;
+    border-radius: 8px;
+    border: 2px solid #9A48C9;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form[aria-label="Buscador de cartas"] input[type="search"]:focus {
+    border-color: #D97D54;
+    box-shadow: 0 0 8px rgba(223,172,77,0.8);
+}
+
+form[aria-label="Buscador de cartas"] button {
+    padding: 0.7em 1.4em;
+    background: linear-gradient(135deg, #286D8D, #9A48C9);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+form[aria-label="Buscador de cartas"] button:hover {
+    background: linear-gradient(135deg, #D97D54, #EBBAB9);
+    color: #08415C;
+    box-shadow: 0 0 12px rgba(167, 46, 112, 0.8);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    header[role=banner] {
+        background-attachment: scroll; /* mejora rendimiento móvil */
+        padding: 20px 0;
+    }
+
+    .logo {
+        height: 120px;
+    }
+
+    header[role=banner] .tagline {
+        font-size: 0.9rem;
+    }
+
+    nav[aria-label="Navegación principal"] ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    form[aria-label="Buscador de cartas"] {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    form[aria-label="Buscador de cartas"] input,
+    form[aria-label="Buscador de cartas"] button {
+        width: 100%;
+    }
+}

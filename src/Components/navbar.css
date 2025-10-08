@@ -1,0 +1,34 @@
+.navbar {
+    background-color: #343a40; /* Dark background */
+    border-bottom: 2px solid #495057; /* Subtle border */
+}
+
+.navbar-brand {
+    color: #f8f9fa; /* Light text for the brand */
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #ffc107; /* Highlight color on hover */
+}
+
+.nav-link {
+    color: #adb5bd; /* Light gray for links */
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffc107; /* Highlight color on hover */
+}
+
+.navbar-toggler {
+    border-color: #adb5bd; /* Light gray for the toggler border */
+}
+
+.navbar-toggler-icon {
+    background-color: #adb5bd; /* Light gray for the toggler icon */
+}
