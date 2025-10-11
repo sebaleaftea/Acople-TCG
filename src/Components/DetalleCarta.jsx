@@ -1,24 +1,28 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import { allCards } from "../data/cards";
+import { useCart } from "../contexts/CartContext";
 
 //parametros de campos tipicos del detalle de una carta
-const DetalleCarta = () =>{
-    const[condicion, setCondicion] = usetState("Near Mint")
-    const[rareza, setRareza] = useState("rara");
-    const[extras, setExtras] = useState([]);
+const DetalleCarta = () => {
+    const { id } = useParams();
+    const card = allCards.find(c => c.id === id) || { name: 'Carta no encontrada', image: '', rarity: 'rara', price: 0 };
 
-    const handleExtrasChange = (change) =>{
-        const options = Array.from(change.target.selectedOptions, (opt) => 
-        opt.value); //utilizo opt como abreviacion de option 
+    const [condicion, setCondicion] = useState("Near Mint");
+    const [rareza, setRareza] = useState(card.rarity);
+    const [extras, setExtras] = useState([]);
+
+    const handleExtrasChange = (change) => {
+        const options = Array.from(change.target.selectedOptions, (opt) =>
+        opt.value); //utilizo opt como abreviacion de option
         setExtras(options);
     };
 
     //Manejar envio
-    const handleSubmit = (event) =>{
+    const handleSubmit = (event) => {
         event.preventDefault();
-        //Aca podemos conectar la logica del carrito
-
-        alert(`Agregado al carrito\n: ${condicion}, \nRareza: ${rareza}, 
-            \nExtras: ${extras.join(", ")}`);
+        const { addToCart } = useCart();
+        addToCart(`${card.name} (${condicion}, ${rareza}, ${extras.join(", ")})`, card.price);
     };
 
     //Una vez realizado todas las funciones del componentes ahora retornamos
@@ -26,10 +30,11 @@ const DetalleCarta = () =>{
     return(
         <section id="detalle-carta" className="screen" aria-labelledby="detalle-title">
       <h2 id="detalle-title">Detalle de la Carta</h2>
-      <article data-id="CQ101">
+      <article data-id={card.id}>
         <header>
-          <h3>MTG: Time Walk</h3>
-          <p className="meta">Rareza: Rara • Condición: Near Mint</p>
+          <img src={card.image} alt={card.name} style={{ maxWidth: '200px' }} />
+          <h3>{card.name}</h3>
+          <p className="meta">Rareza: {rareza} • Condición: {condicion}</p>
         </header>
         <form aria-label="Personalización de la compra" onSubmit={handleSubmit}>
           <fieldset>
