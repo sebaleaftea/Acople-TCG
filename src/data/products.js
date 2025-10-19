@@ -11,6 +11,7 @@ import dadosLotr from '../assets/images/productos/dados/dados lotr.avif';
 import dadosMoradoDorado from '../assets/images/productos/dados/dados morado dorado.avif';
 import dadosRunas from '../assets/images/productos/dados/dados runas.avif';
 
+
 import charmanderPlaymat from '../assets/images/productos/playmat/charmander playmat.webp';
 import demonHuntersPlaymat from '../assets/images/productos/playmat/demon hunters playmat.webp';
 import dyrkottrPlaymat from '../assets/images/productos/playmat/Dyrkottr; Dragon of Curiosity.webp';
@@ -30,7 +31,7 @@ import sleevesLapras from '../assets/images/productos/protectores/sleeves lapras
 import sleeveBahamut from '../assets/images/productos/protectores/slevee bahamut.webp';
 import sleeveOdin from '../assets/images/productos/protectores/slevee odin.webp';
 
-import { allCards } from './cards.js';
+import { magicCards, pokemonCards, yugiohCards } from './cards.js';
 
 export const carpetasProducts = [
   { id: 'carpeta-cactuar', name: 'Cactuar Carpeta', image: cactuarCarpeta, category: 'carpetas', price: 15 },
@@ -74,10 +75,18 @@ export const protectoresProducts = [
 ];
 
 export const allProducts = [
-  ...allCards,
-  ...carpetasProducts,
-  ...dadosProducts,
-  ...playmatProducts,
-  ...portamazosProducts,
-  ...protectoresProducts,
+  // Enriquecer singles con metadatos para filtros unificados
+  ...magicCards.map(c => ({ ...c, productType: 'single', game: 'magic' })),
+  ...pokemonCards.map(c => ({ ...c, productType: 'single', game: 'pokemon' })),
+  ...yugiohCards.map(c => ({ ...c, productType: 'single', game: 'yugioh' })),
+  // Enriquecer accesorios con metadatos
+  ...carpetasProducts.map(p => ({ ...p, productType: 'accesorio' })),
+  ...dadosProducts.map(p => ({ ...p, productType: 'accesorio' })),
+  ...playmatProducts.map(p => ({ ...p, productType: 'accesorio' })),
+  ...portamazosProducts.map(p => ({ ...p, productType: 'accesorio' })),
+  ...protectoresProducts.map(p => ({ ...p, productType: 'accesorio' })),
 ];
+
+// Utilidades para el filtrado/selector
+export const ACCESSORY_CATEGORIES = ['carpetas', 'dados', 'playmat', 'portamazos', 'protectores'];
+export const GAMES = ['magic', 'pokemon', 'yugioh'];

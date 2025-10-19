@@ -13,9 +13,8 @@ export default function AppNavbar() {
       <nav aria-label="Navegación principal">
         <ul>
           <li><Link to="/" data-nav>Inicio</Link></li>
-          <li><Link to="/magic-singles" data-nav>Singles</Link></li>
+          <li><Link to="/#singles" data-nav>Singles</Link></li>
           <li><Link to="/all-products" data-nav>Productos</Link></li>
-          <li><Link to="/productos-acople" data-nav>Otros Productos</Link></li>
           <li><Link to="/blog" data-nav>Guía & Estrategias</Link></li>
           <li><Link to="/login" data-nav>Ingresar</Link></li>
         </ul>

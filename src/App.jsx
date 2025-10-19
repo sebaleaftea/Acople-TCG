@@ -14,8 +14,8 @@ export default function App() {
         <AppNavbar />
         {/* Aquí van las rutas principales */}
         <AppRouter />
-  {/* MiniCarrito global para todas las rutas */}
-  <MiniCart />
+        {/* MiniCarrito global para todas las rutas */}
+        <MiniCart />
         <AppFooter />
       </BrowserRouter>
     </CartProvider>

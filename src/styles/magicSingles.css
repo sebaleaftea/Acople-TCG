@@ -1,0 +1,159 @@
+/* Estilos para la página Magic Singles */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+header {
+    background-color: #08415C;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+main.page-singles {
+    display: flex;
+    margin: 2rem;
+    flex-direction: row;
+    gap: 2rem;
+    width: 100%;
+    min-height: 80vh;
+}
+
+/* Barra lateral de filtros */
+.filter-sidebar.filters {
+    width: 22%;
+    max-width: 300px;
+    min-width: 220px;
+    background-color: #bcccca;
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    margin-right: 1rem;
+}
+
+.filters h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.filters form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.filters fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.filters legend {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.filters select,
+.filters input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.filters button {
+    background-color: #CC2936;
+    color: #fff;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filters button:hover {
+    background-color: #EBBAB9;
+}
+
+/* Resultados de búsqueda */
+.results {
+    width: 78%;
+    padding: 1rem;
+}
+
+.results h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Grid contenedor de las cartas */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+/* Estilos de cartas dentro del contenedor */
+.card {
+    background-color: #cce4dc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.card button {
+    background-color: #08415C;
+    color: #fff;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: auto;
+}
+
+.card button:hover {
+    background-color: #388697;
+}
+
+/* Opcional: para pantallas medianas, muestra 2 cartas por fila */
+@media (max-width: 1200px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Opcional: para pantallas pequeñas, muestra 1 carta por fila */
+@media (max-width: 800px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+}

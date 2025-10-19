@@ -1,66 +1,24 @@
-
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../contexts/CartContext";
 import "../styles/home.css";
-import blackLotus from "../assets/images/black-lotus.webp";
-import theOneRing from "../assets/images/the-one-ring.jpg";
-import timeWalk from "../assets/images/time-walk.webp";
-import charizardEx from "../assets/images/Charizard-ex.webp";
-import pikachuIllustrator from "../assets/images/Pokémon_Illustrator.png";
-import mewtwo from "../assets/images/mewtwo.jpg";
-import blueEyes from "../assets/images/blue-eyes-dragon.jpg";
-import darkMagician from "../assets/images/dark-magician.jpg";
+import blackLotus from "../assets/images/magicSingles/black-lotus.webp";
+import theOneRing from "../assets/images/magicSingles/the-one-ring-scroll.jpg";
+import timeWalk from "../assets/images/magicSingles/time-walk.webp";
+import charizardEx from "../assets/images/pokemonSingles/Charizard-ex.webp";
+import pikachuIllustrator from "../assets/images/pokemonSingles/pikachu_Illustrator.png";
+import mewtwo from "../assets/images/pokemonSingles/mewtwo.jpg";
+import blueEyes from "../assets/images/yugiohSingles/blue-eyes-dragon.jpg";
+import darkMagician from "../assets/images/yugiohSingles/dark-magician.jpg";
 import magicIcon from "../assets/images/magic-icon.png";
 import pokemonIcon from "../assets/images/pokemon-icon.png";
 import yugiohIcon from "../assets/images/yugioh-icon.png";
+import Ticker from "../Components/Ticker";
 
 const Home = () => {
-  const { cart, getTotal, getQuantity, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const toggleCart = () => setIsCartOpen(!isCartOpen);
 
   return (
     <main id="contenido" tabIndex="-1">
-      {/* Botón flotante de carrito */}
-      <button
-        id="btn-mini-carrito"
-        aria-label="Ver carrito"
-        onClick={toggleCart}
-        style={{ position: 'fixed', bottom: '32px', right: '32px', zIndex: 1001, background: '#CC2936', color: '#fff', border: 'none', borderRadius: '50%', width: '56px', height: '56px', boxShadow: '0 2px 8px #0002', fontSize: '2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-      >
-        🛒
-        <span id="mini-carrito-cantidad" style={{ position: 'absolute', top: '8px', right: '8px', background: '#fff', color: '#CC2936', borderRadius: '50%', padding: '2px 7px', fontSize: '0.9rem', fontWeight: 'bold' }}>{getQuantity()}</span>
-      </button>
-
-      {/* Mini-carrito sidebar */}
-      <aside id="mini-carrito" style={{ position: 'fixed', top: '0', right: isCartOpen ? '0' : '-400px', width: '340px', height: '100vh', background: '#fff', boxShadow: '-4px 0 16px #0002', zIndex: 1002, transition: 'right 0.3s', display: 'flex', flexDirection: 'column' }}>
-        <header style={{ padding: '1rem', borderBottom: '1px solid #eee', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h2 style={{ margin: '0', fontSize: '1.2rem', color: '#08415C' }}>Carrito</h2>
-          <button id="cerrar-mini-carrito" aria-label="Cerrar" onClick={toggleCart} style={{ background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', color: '#CC2936' }}>&times;</button>
-        </header>
-        <div id="mini-carrito-lista" style={{ flex: '1', overflowY: 'auto', padding: '1rem' }}>
-          {cart.map((item, idx) => (
-            <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.7rem', borderBottom: '1px solid #eee', paddingBottom: '0.5rem', background: '#f9f9f9', borderRadius: '6px', padding: '0.7rem 0.5rem' }}>
-              <div>
-                <strong style={{ color: '#08415C', fontSize: '1.05rem' }}>{item.nombre}</strong>
-                <small style={{ color: '#388697', fontSize: '0.95rem' }}>x{item.cantidad}</small>
-                <div style={{ color: '#388697', fontSize: '0.97rem', marginLeft: '2px', display: 'block' }}>${item.precio} c/u</div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <button onClick={() => decreaseQuantity(idx)} style={{ background: '#f0f0f0', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer', marginRight: '5px' }}>-</button>
-                <span>{item.cantidad}</span>
-                <button onClick={() => increaseQuantity(idx)} style={{ background: '#f0f0f0', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer', marginLeft: '5px' }}>+</button>
-                <button onClick={() => removeFromCart(idx)} title="Eliminar" style={{ background: '#CC2936', color: '#fff', border: 'none', borderRadius: '50%', width: '28px', height: '28px', fontSize: '1.2rem', cursor: 'pointer', marginLeft: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
-              </div>
-            </div>
-          ))}
-        </div>
-        <footer style={{ padding: '1rem', borderTop: '1px solid #eee' }}>
-          <strong id="mini-carrito-total">Total: ${getTotal().toLocaleString()}</strong>
-        </footer>
-      </aside>
+      {/* MiniCarrito global ya se renderiza desde App.js */}
 
     {/* Pantalla 1: HOME / LANDING */}
     <section id="home" className="screen" aria-labelledby="home-title">
@@ -74,10 +32,10 @@ const Home = () => {
         <button type="submit">Buscar</button>
       </form>
 
-      {/* Cartas destacadas */}
+      {/* Cartas destacadas - efecto ticker */}
       <section aria-labelledby="home-destacados-title">
         <h3 id="home-destacados-title">Cartas destacadas de hoy</h3>
-        <ul className="cards-gallery" data-test-id="home-destacados">
+        <Ticker ariaLabel="Cartas destacadas de hoy">
           {/* Magic: The Gathering */}
           <li className="card-tcg">
             <img src={blackLotus} alt="MTG: Black Lotus" className="card-img" />
@@ -94,7 +52,7 @@ const Home = () => {
             <img src={theOneRing} alt="MTG: The One Ring" className="card-img" />
             <div className="card-content">
               <div className="card-info">
-                <div className="card-title">The One Ring Scroll Edition</div>
+                <div className="card-title">The One Ring</div>
                 <div className="card-meta">Magic: The Gathering</div>
                 <div className="card-desc">La carta más icónica de la expansión de LOTR está aquí.</div>
               </div>
@@ -171,7 +129,7 @@ const Home = () => {
               <Link to="/detalle-carta/dark-magician" className="card-link" data-action="ver-detalle" data-id="Y02">Ver detalle</Link>
             </div>
           </li>
-        </ul>
+        </Ticker>
       </section>
     </section>
 
