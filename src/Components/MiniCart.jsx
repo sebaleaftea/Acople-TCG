@@ -15,7 +15,6 @@ const MiniCart = () => {
     closeCart,
     toast,
     closeToast,
-    clearCart,
   } = useCart();
 
   // Cerrar con tecla Escape cuando está abierto
@@ -32,75 +31,74 @@ const MiniCart = () => {
     <>
       {/* Overlay de fondo */}
       {isCartOpen && (
-        <div className="mini-carrito-overlay" aria-hidden="true" onClick={closeCart} />
+        <div className="mini-cart-overlay" aria-hidden="true" onClick={closeCart} />
       )}
 
       {/* Toast */}
       {toast?.visible && (
-        <div role="status" aria-live="polite" onClick={closeToast} className="mini-carrito-toast">
+        <div role="status" aria-live="polite" onClick={closeToast} className="mini-cart-toast">
           {toast.message}
         </div>
       )}
+
       {/* Botón flotante de carrito */}
       <button
-        id="btn-mini-carrito"
+        id="btn-mini-cart"
         aria-label="Ver carrito"
         onClick={toggleCart}
-        className="mini-carrito-btn"
+        className="mini-cart-btn"
       >
         🛒
-        <span id="mini-carrito-cantidad" className="mini-carrito-cantidad">{getQuantity()}</span>
+        <span id="mini-cart-cantidad" className="mini-cart-cantidad">{getQuantity()}</span>
       </button>
 
-      {/* Mini-carrito sidebar */}
-      <aside
-        id="mini-carrito"
-        className={`mini-carrito-sidebar ${isCartOpen ? 'abierto' : ''}`}
+      {/* Mini-cart dropdown */}
+      <div
+        id="mini-cart"
+        className={`mini-cart-dropdown ${isCartOpen ? 'abierto' : ''}`}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="mini-carrito-title"
+        aria-labelledby="mini-cart-title"
       >
-        <header className="mini-carrito-header">
-          <h2 id="mini-carrito-title">Carrito</h2>
-          <button id="cerrar-mini-carrito" aria-label="Cerrar" onClick={toggleCart} className="mini-carrito-cerrar">&times;</button>
-        </header>
-        <div id="mini-carrito-lista" className="mini-carrito-lista">
+        <div className="mini-cart-header">
+          <h2 id="mini-cart-title">Carrito</h2>
+          <button id="cerrar-mini-cart" aria-label="Cerrar" onClick={toggleCart} className="mini-cart-cerrar">&times;</button>
+        </div>
+
+        <div id="mini-cart-lista" className="mini-cart-lista">
           {cart.length === 0 ? (
-            <p style={{ color: '#666' }}>Tu carrito está vacío.</p>
-          ) : cart.map((item, idx) => (
-            <div key={item?.id ?? idx} className="mini-carrito-item">
-              <div className="mini-carrito-item-izq">
-                {item.imagen && (
-                  <img className="mini-carrito-thumb" src={item.imagen} alt={item.nombre} />
-                )}
-                <div className="mini-carrito-info">
-                  <strong className="mini-carrito-item-nombre">{String(item.nombre)}</strong>
-                  <small className="mini-carrito-item-cantidad">x{Number(item.cantidad) || 0}</small>
-                  <span className="mini-carrito-item-precio-unitario">${Number(item.precio || 0).toLocaleString()} c/u</span>
+            <p className="empty-cart">Tu carrito está vacío.</p>
+          ) : (
+            cart.map((item, idx) => (
+              <div key={item?.id ?? idx} className="cart-item">
+                <img src={item.imagen} alt={item.nombre} className="cart-item-image" />
+                <div className="item-details">
+                  <h4 className="item-name">{String(item.nombre)}</h4>
+                  <span className="item-price">${Number(item.precio || 0).toLocaleString()} CLP</span>
+                  <div className="quantity-controls">
+                    <button onClick={() => decreaseQuantity(idx)} className="qty-btn">-</button>
+                    <span className="qty">{Number(item.cantidad) || 0}</span>
+                    <button onClick={() => increaseQuantity(idx)} className="qty-btn">+</button>
+                    <button onClick={() => removeFromCart(idx)} className="remove-btn">🗑️</button>
+                  </div>
                 </div>
               </div>
-              <div className="mini-carrito-item-controles">
-                <button onClick={() => decreaseQuantity(idx)} title="Disminuir" aria-label="Disminuir cantidad" className="mini-carrito-qty-btn">-</button>
-                <span className="mini-carrito-qty">{Number(item.cantidad) || 0}</span>
-                <button onClick={() => increaseQuantity(idx)} title="Aumentar" aria-label="Aumentar cantidad" className="mini-carrito-qty-btn">+</button>
-                <button onClick={() => removeFromCart(idx)} title="Eliminar" aria-label="Eliminar del carrito" className="mini-carrito-remove-btn">×</button>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
-        <footer className="mini-carrito-footer">
-          <div className="mini-carrito-resumen">
-            <strong id="mini-carrito-total">Total: ${getTotal().toLocaleString()}</strong>
-            <button onClick={closeCart} className="mini-carrito-btn-secundario">Seguir comprando</button>
-          </div>
-          <div className="mini-carrito-acciones">
-            <button onClick={() => window.confirm('¿Vaciar carrito?') && clearCart()} className="mini-carrito-btn-outline">Vaciar carrito</button>
-            <Link to="/detalle-compra" onClick={closeCart} className="mini-carrito-ver-carrito">
-              Ir al carrito / Pagar
+
+        <div className="cart-summary">
+          <p className="total-price">Total: ${getTotal().toLocaleString()} CLP</p>
+          <div className="cart-actions">
+            <Link to="/detalle-compra" onClick={closeCart} className="view-cart">
+              View Cart
+            </Link>
+            <Link to="/detalle-compra" onClick={closeCart} className="checkout">
+              Checkout
             </Link>
           </div>
-        </footer>
-      </aside>
+        </div>
+      </div>
     </>
   );
 };

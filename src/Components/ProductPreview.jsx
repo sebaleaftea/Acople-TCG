@@ -13,22 +13,29 @@ const ProductPreview = (props) => {
   const precio = item.precio ?? item.price ?? 0;
   const categoria = item.category || item.categoria || item.productType === 'accesorio' ? (item.category || 'accesorio') : undefined;
 
+  // Dummy discount logic: if category is 'dados' or 'portamazos', show discount
+  const hasDiscount = categoria && (categoria === 'dados' || categoria === 'portamazos');
+  const discountPercent = hasDiscount ? 15 : 0;
+  const oldPrice = hasDiscount ? Math.round(precio * 1.18) : null;
+  const currentPrice = precio;
+
   const handleAddToCart = () => {
     const displayName = categoria ? `${nombre} (${categoria})` : nombre;
-    addToCart(displayName, Number(precio) || 0, imagen);
+    addToCart(displayName, Number(currentPrice) || 0, imagen);
   };
 
   return (
     <article className="card">
-      <div className="card-link" style={{ textDecoration: "none", color: "inherit" }}>
-        <img src={imagen} alt={nombre} />
-        <h3>{nombre}</h3>
-      </div>
+      {hasDiscount && <div className="discount-badge">Save {discountPercent}%</div>}
+      <img src={imagen} alt={nombre} />
+      <h3>{nombre}</h3>
       {categoria && <p>Categoría: {categoria}</p>}
-      <p>Precio: ${precio ? Number(precio).toLocaleString() : "-"}</p>
-      <button className="add-to-cart" onClick={handleAddToCart}>
-        Agregar al carrito
-      </button>
+      <div className="price">
+        <span className="current">${currentPrice ? Number(currentPrice).toLocaleString() : "-"}</span>
+        {oldPrice && <span className="old">${oldPrice.toLocaleString()}</span>}
+      </div>
+      <div className="stars">★★★★☆</div>
+      <button onClick={handleAddToCart}>Add to Cart</button>
     </article>
   );
 };

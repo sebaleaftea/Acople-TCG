@@ -11,15 +11,22 @@ const CardPreview = ({ card }) => {
   const rareza = card.rareza || card.rarity || "-";
   const edicion = card.edicion || card.edition || "-";
 
+  // Dummy discount logic: if id contains 'black' or 'blue', show discount
+  const hasDiscount = card.id && (card.id.includes('black') || card.id.includes('blue'));
+  const discountPercent = hasDiscount ? 20 : 0;
+  const oldPrice = hasDiscount ? Math.round(precio * 1.25) : null;
+  const currentPrice = precio;
+
   const handleAddToCart = () => {
     // Para distinguir por juego si existe
     const categoria = card.game || card.category;
     const displayName = categoria ? `${nombre} (${categoria})` : nombre;
-    addToCart(displayName, Number(precio) || 0, imagen);
+    addToCart(displayName, Number(currentPrice) || 0, imagen);
   };
 
   return (
     <article className="card">
+      {hasDiscount && <div className="discount-badge">Save {discountPercent}%</div>}
       <Link
         to={`/detalle-carta/${card.id}`}
         className="card-link"
@@ -30,8 +37,12 @@ const CardPreview = ({ card }) => {
       </Link>
       <p>Edición: {edicion}</p>
       <p>Rareza: {rareza}</p>
-  <p>Precio: ${precio ? precio.toLocaleString() : "-"}</p>
-  <button className="add-to-cart" onClick={handleAddToCart}>Agregar al carrito</button>
+      <div className="price">
+        <span className="current">${currentPrice ? currentPrice.toLocaleString() : "-"}</span>
+        {oldPrice && <span className="old">${oldPrice.toLocaleString()}</span>}
+      </div>
+      <div className="stars">★★★★☆</div>
+      <button onClick={handleAddToCart}>Add to Cart</button>
     </article>
   );
 };

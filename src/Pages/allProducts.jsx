@@ -7,6 +7,7 @@ import '../styles/magicSingles.css';
 
 const AllProducts = () => {
   const [filtered, setFiltered] = useState(allProducts);
+  const [showFilters, setShowFilters] = useState(false);
 
   const handleFilter = (filters) => {
     let items = allProducts;
@@ -64,13 +65,19 @@ const AllProducts = () => {
   return (
     <div>
       <header>
-        <h1>Todos los Productos</h1>
+        <h2>Todos los Productos</h2>
       </header>
       <main className="page-singles">
         <aside className="filter-sidebar filters">
           <Filter onFilter={handleFilter} mode="all" showSearch={true} />
         </aside>
         <section className="results">
+          <button
+            className="mobile-filter-toggle"
+            onClick={() => setShowFilters(true)}
+          >
+            Mostrar Filtros
+          </button>
           <h2>Resultados</h2>
           <div className="cards-grid">
             {filtered.map(item => (
@@ -83,9 +90,26 @@ const AllProducts = () => {
           </div>
         </section>
       </main>
-      <footer>
-        <p>© 2025 Acople TCG. Todos los derechos reservados.</p>
-      </footer>
+
+      {/* Mobile Filter Modal */}
+      {showFilters && (
+        <div className="mobile-filter-modal-overlay" onClick={() => setShowFilters(false)}>
+          <div className="mobile-filter-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="mobile-filter-header">
+              <h3>Filtros</h3>
+              <button
+                className="mobile-filter-close"
+                onClick={() => setShowFilters(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <div className="mobile-filter-content">
+              <Filter onFilter={handleFilter} mode="all" showSearch={true} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

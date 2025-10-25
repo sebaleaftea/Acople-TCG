@@ -1,2 +1,38 @@
-:root {color-scheme: dark; }
-body {background: linear-gradient(180deg, #0d0d0d 0%, #1a1a1a 100% );}
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap');
+
+:root {
+  color-scheme: dark;
+
+  /* Specified Brand Colors */
+  --brand-primary: #8b3bbd; /* Primary purple */
+  --brand-secondary: #001c34; /* Dark blue */
+  --brand-accent: #f1c40f; /* Yellow accent */
+  --brand-black: #000000; /* Black */
+  --brand-white: #ffffff; /* White */
+
+  /* Legacy Colors (if needed) */
+  --primary-blue: #00bfff; /* Electric blue from banner */
+  --primary-purple: #8a2be2; /* Cosmic purple */
+  --primary-red: #ff4500; /* Vibrant red/orange */
+  --accent-orange: #ff8c00; /* Vibrant orange from logo */
+  --neutral-dark: #1a1a1a; /* Dark gray for backgrounds */
+  --neutral-light: #f0f0f0; /* Light gray for text on dark */
+  --neutral-white: #ffffff; /* White for highlights */
+
+  /* Neon Colors for Modals */
+  --neon-blue: #00e0ff;
+  --neon-purple: #bb00ff;
+  --neon-pink: #ff4e50;
+  --neon-orange: #f9d423;
+  --deep-purple: #1a0033;
+  --vibrant-blue: #0044ff;
+
+  /* Typography */
+  --font-title: 'Bebas Neue', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+  --font-alt: 'Montserrat', sans-serif;
+}
+
+body {
+  background: linear-gradient(180deg, var(--neutral-dark) 0%, #0d0d0d 100%);
+}

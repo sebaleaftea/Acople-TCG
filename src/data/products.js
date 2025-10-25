@@ -75,16 +75,90 @@ export const protectoresProducts = [
 ];
 
 export const allProducts = [
-  // Enriquecer singles con metadatos para filtros unificados
-  ...magicCards.map(c => ({ ...c, productType: 'single', game: 'magic' })),
-  ...pokemonCards.map(c => ({ ...c, productType: 'single', game: 'pokemon' })),
-  ...yugiohCards.map(c => ({ ...c, productType: 'single', game: 'yugioh' })),
-  // Enriquecer accesorios con metadatos
-  ...carpetasProducts.map(p => ({ ...p, productType: 'accesorio' })),
-  ...dadosProducts.map(p => ({ ...p, productType: 'accesorio' })),
-  ...playmatProducts.map(p => ({ ...p, productType: 'accesorio' })),
-  ...portamazosProducts.map(p => ({ ...p, productType: 'accesorio' })),
-  ...protectoresProducts.map(p => ({ ...p, productType: 'accesorio' })),
+  // Enriquecer singles con metadatos para filtros unificados y campos adicionales
+  ...magicCards.map(c => ({
+    ...c,
+    productType: 'single',
+    game: 'magic',
+    stock: Math.floor(Math.random() * 50) + 1, // Simular stock aleatorio
+    grado: 'NM', // Near Mint por defecto
+    expansion: c.edicion,
+    name: c.nombre, // Estandarizar nombre
+    image: c.imagen,
+    price: c.precio,
+    rarity: c.rareza,
+    edition: c.edicion,
+    description: c.descripcion
+  })),
+  ...pokemonCards.map(c => ({
+    ...c,
+    productType: 'single',
+    game: 'pokemon',
+    stock: Math.floor(Math.random() * 50) + 1,
+    grado: 'NM',
+    expansion: c.edicion,
+    name: c.nombre,
+    image: c.imagen,
+    price: c.precio,
+    rarity: c.rareza,
+    edition: c.edicion,
+    description: c.descripcion
+  })),
+  ...yugiohCards.map(c => ({
+    ...c,
+    productType: 'single',
+    game: 'yugioh',
+    stock: Math.floor(Math.random() * 50) + 1,
+    grado: 'NM',
+    expansion: c.edicion,
+    name: c.nombre,
+    image: c.imagen,
+    price: c.precio,
+    rarity: c.rareza,
+    edition: c.edicion,
+    description: c.descripcion
+  })),
+  // Enriquecer accesorios con metadatos y campos adicionales
+  ...carpetasProducts.map(p => ({
+    ...p,
+    stock: Math.floor(Math.random() * 100) + 10,
+    grado: 'Nuevo',
+    expansion: null,
+    rarity: null,
+    edition: null
+  })),
+  ...dadosProducts.map(p => ({
+    ...p,
+    stock: Math.floor(Math.random() * 100) + 10,
+    grado: 'Nuevo',
+    expansion: null,
+    rarity: null,
+    edition: null
+  })),
+  ...playmatProducts.map(p => ({
+    ...p,
+    stock: Math.floor(Math.random() * 50) + 5,
+    grado: 'Nuevo',
+    expansion: null,
+    rarity: null,
+    edition: null
+  })),
+  ...portamazosProducts.map(p => ({
+    ...p,
+    stock: Math.floor(Math.random() * 200) + 20,
+    grado: 'Nuevo',
+    expansion: null,
+    rarity: null,
+    edition: null
+  })),
+  ...protectoresProducts.map(p => ({
+    ...p,
+    stock: Math.floor(Math.random() * 500) + 50,
+    grado: 'Nuevo',
+    expansion: null,
+    rarity: null,
+    edition: null
+  })),
 ];
 
 // Utilidades para el filtrado/selector

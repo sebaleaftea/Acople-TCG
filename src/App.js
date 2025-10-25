@@ -6,18 +6,32 @@ import './styles/theme.css';
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./routes/AppRouter.jsx";
 import { CartProvider } from "./contexts/CartContext.jsx";
+import { AuthProvider } from "./contexts/AuthContext.jsx";
+
+function Layout({ children }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <AppNavbar />
+      <main style={{ flex: 1 }}>
+        {children}
+      </main>
+      <AppFooter />
+    </div>
+  );
+}
 
 export default function App() {
   return (
-    <CartProvider>
-      <BrowserRouter>
-        <AppNavbar />
-        {/* Aquí van las rutas principales */}
-        <AppRouter />
-  {/* MiniCarrito global para todas las rutas */}
-  <MiniCart />
-        <AppFooter />
-      </BrowserRouter>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <BrowserRouter>
+          <Layout>
+            <AppRouter />
+          </Layout>
+          {/* MiniCarrito global para todas las rutas */}
+          <MiniCart />
+        </BrowserRouter>
+      </CartProvider>
+    </AuthProvider>
   );
 }

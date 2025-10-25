@@ -1,12 +1,23 @@
-# TODO: Update Magic Singles Page to Match HTML Structure
+# Update Modal Designs for Vibrant Neon Aesthetic
 
-- [x] Update Acople-TCG/src/data/cards.js: Add edition and format to magicCards, update rarities to include "mitica", and adjust prices and details to match HTML examples.
-- [x] Modify Acople-TCG/src/Components/Filter.jsx: Add edition and format selects, update rarity options to include "mitica".
-- [x] Modify Acople-TCG/src/Components/CardPreview.jsx: Update structure to match HTML (link around img and h3, add edition p, add "Add to Cart" button with cart integration).
-- [x] Modify Acople-TCG/src/Pages/magicSingles.jsx: Change layout to use aside for filters and section for results, add header and footer if needed.
-- [x] Create Acople-TCG/src/styles/magicSingles.css: Add the provided CSS styles.
-- [x] Update Acople-TCG/src/Pages/magicSingles.jsx: Import the new CSS file.
-- [x] Fix import path for CSS.
-- [x] Adjust filter width to 25% and results to 75% for better space allocation.
-- [x] Add responsive design for mobile/tablet.
-- [ ] Test the page: Ensure filters work, cards display correctly, cart functionality works, and layout matches HTML.
+## 1. Auth Modal (Login/Register)
+- [ ] Add neon color variables to theme.css
+- [ ] Update modal background to diagonal gradient (#1a0033 → #0044ff)
+- [ ] Style tab active indicator with neon blue/purple and glow
+- [ ] Update buttons to neon gradient (#00e0ff → #bb00ff) with glow
+- [ ] Apply bold fonts (Bebas Neue/Poppins) with text-shadow
+- [ ] Add subtle animations for tab switching and hovers
+
+## 2. Address Modal
+- [ ] Style header with warm pink-orange gradient (#ff4e50 → #f9d423)
+- [ ] Update input fields: white bg, neon borders on focus
+- [ ] Style dropdowns consistently
+- [ ] Update "Guardar" button to pink-orange gradient
+- [ ] Update "Cancelar" button to plain white with soft border
+- [ ] Add glowing borders and shadows for interactive elements
+- [ ] Ensure responsive design and no overflow
+
+## 3. General
+- [ ] Verify responsive behavior on mobile
+- [ ] Test animations (fade, glow pulse)
+- [ ] Centralize reusable theme variables in theme.css

@@ -24,9 +24,9 @@ import rhysticStudy from '../assets/images/magicSingles/rhystic-study.avif';
 
 /* Cartas yugioh imagenes (agrega estos archivos en assets) */
 import drollAndLockBird from '../assets/images/yugiohSingles/droll-and-lock-bird.jpg';
-import darkMagicianOfChaos from '../assets/images/yugiohSingles/dark-magician-of-chaos.jpg';
-import darkMagician from '../assets/images/yugiohSingles/dark-magician.webp';
-import fiendsmithEngraver from '../assets/images/yugiohSingles/fiendsmith-engraver.jpg';
+import darkMagicianOfChaos from '../assets/images/yugiohSingles/Dark-Magician-Of-Chaos.jpg';
+import darkMagician from '../assets/images/yugiohSingles/Dark-Magician.webp';
+import fiendsmithEngraver from '../assets/images/yugiohSingles/Fiendsmith-Engraver.jpg';
 
 // Magic Singles
 export const magicCards = [
