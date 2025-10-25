@@ -26,7 +26,7 @@ const Home = () => {
     {/* Pantalla 1: HOME / LANDING */}
     <section id="home" className="screen" aria-labelledby="home-title">
       <h2 id="home-title">Bienvenido</h2>
-      <p className="homepage-tagline">Unleash the power of rare cards, forge unstoppable decks, and shape your destiny across the multiverse.</p>
+      <p className="homepage-tagline">Libera el poder de tus cartas raras, Forja mazos imparables.</p>
 
       {/* Buscador de cartas */}
       <form aria-label="Buscador de cartas" data-screen="home">

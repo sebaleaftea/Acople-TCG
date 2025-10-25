@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, signInWithEmailAndPassword, isConfigured, onAuthStateChanged } from '../firebase';
+import '../styles/home.css';
 
 // pagina de login para administrador , tendra una autenticacion basica con firebase auth 
 
@@ -36,21 +37,52 @@ const AdminLogin = () => {
   };
 
   return (
-    <main style={{ maxWidth: 420, margin: '3rem auto', background: '#f5f5f5', borderRadius: 12, boxShadow: '0 4px 16px rgba(8,65,92,0.10)', padding: '2rem 1.5rem' }}>
-      <h1 style={{ textAlign: 'center', color: '#08415C', marginBottom: '1.5rem' }}>Admin - Iniciar sesión</h1>
-      <form onSubmit={onSubmit} style={{ display: 'grid', gap: 12 }}>
-        <label>
-          <span style={{ display: 'block', marginBottom: 6 }}>Email</span>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: '1px solid #ddd' }} />
-        </label>
-        <label>
-          <span style={{ display: 'block', marginBottom: 6 }}>Contraseña</span>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: '1px solid #ddd' }} />
-        </label>
-        {error && <div style={{ color: '#b00020', marginTop: 4 }}>{error}</div>}
-        <button type="submit" className="mini-carrito-ver-carrito">Ingresar</button>
-      </form>
-    </main>
+    <div className="modal-overlay">
+      <div className="modal-content" role="dialog" aria-labelledby="admin-login-title">
+        <button
+          type="button"
+          className="modal-close"
+          aria-label="Cerrar"
+          onClick={() => navigate('/')}
+        >
+          ×
+        </button>
+
+        <div className="modal-body">
+          <h2 id="admin-login-title">Admin - Iniciar sesión</h2>
+
+          <form onSubmit={onSubmit} aria-label="Login de administrador">
+            <div className="form-group">
+              <label htmlFor="admin-email">Email</label>
+              <input
+                id="admin-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="tu@email.com"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="admin-password">Contraseña</label>
+              <input
+                id="admin-password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="••••••••"
+              />
+            </div>
+
+            {error && <div className="error-message">{error}</div>}
+
+            <button type="submit" className="modal-submit-btn">Ingresar</button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 

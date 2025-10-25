@@ -1,0 +1,100 @@
+.admin-main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #2c2c54 0%, #8e44ad 100%);
+  min-height: 100vh;
+  color: #fff;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.admin-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 2.5rem;
+  margin: 0;
+  color: #ff6ec4;
+  text-shadow: 0 0 10px rgba(255, 110, 196, 0.5);
+}
+
+.admin-logout-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.admin-logout-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 18px rgba(255, 110, 196, 0.2);
+  transform: translateY(-1px);
+}
+
+.admin-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.admin-section-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.6rem;
+  color: #ff6ec4;
+  margin: 0 0 1rem 0;
+}
+
+/* Tabla de inventario */
+.admin-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.admin-table thead th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  border-bottom: 2px solid #ff6ec4;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.admin-table tbody td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-main { padding: 1rem; }
+  .admin-title { font-size: 2rem; }
+  .admin-card { padding: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .admin-title { font-size: 1.8rem; }
+}
