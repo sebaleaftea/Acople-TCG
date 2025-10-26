@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useLoading } from '../contexts/useLoading';
 import '../styles/home.css';
 
 const LoginRegisterModal = ({ isOpen, onClose }) => {
@@ -11,6 +13,8 @@ const LoginRegisterModal = ({ isOpen, onClose }) => {
   });
   const [error, setError] = useState('');
   const { login } = useAuth();
+  const navigate = useNavigate();
+  const { showLoading } = useLoading();
 
   const handleInputChange = (e) => {
     setFormData({
@@ -29,8 +33,22 @@ const LoginRegisterModal = ({ isOpen, onClose }) => {
 
     const success = login(formData.email, formData.password);
     if (success) {
+      const email = formData.email.toLowerCase();
+      const isAdminQuick = email === 'admin@admin.cl' && formData.password === 'admin';
+
+      if (isAdminQuick) {
+        localStorage.setItem('adminAuthed', 'true');
+        showLoading({ message: 'Entrando al panel...', duration: 5000 });
+        onClose();
+        setFormData({ email: '', password: '', name: '' });
+        navigate('/admin');
+        return;
+      }
+
+      showLoading({ message: 'Cargando...', duration: 5000 });
       onClose();
       setFormData({ email: '', password: '', name: '' });
+      navigate('/perfil');
     } else {
       setError('Credenciales inválidas');
     }
@@ -46,8 +64,22 @@ const LoginRegisterModal = ({ isOpen, onClose }) => {
     // For now, registration is the same as login (simulated)
     const success = login(formData.email, formData.password);
     if (success) {
+      const email = formData.email.toLowerCase();
+      const isAdminQuick = email === 'admin@admin.cl' && formData.password === 'admin';
+
+      if (isAdminQuick) {
+        localStorage.setItem('adminAuthed', 'true');
+        showLoading({ message: 'Entrando al panel...', duration: 5000 });
+        onClose();
+        setFormData({ email: '', password: '', name: '' });
+        navigate('/admin');
+        return;
+      }
+
+      showLoading({ message: 'Cargando...', duration: 5000 });
       onClose();
       setFormData({ email: '', password: '', name: '' });
+      navigate('/perfil');
     } else {
       setError('Error en el registro');
     }

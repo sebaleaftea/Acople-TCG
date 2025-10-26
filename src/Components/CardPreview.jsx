@@ -32,7 +32,9 @@ const CardPreview = ({ card }) => {
         className="card-link"
         style={{ textDecoration: "none", color: "inherit" }}
       >
-        <img src={imagen} alt={nombre} />
+        <div className="card-media">
+          <img src={imagen} alt={nombre} loading="lazy" decoding="async" />
+        </div>
         <h3>{nombre}</h3>
       </Link>
       <p>Edición: {edicion}</p>

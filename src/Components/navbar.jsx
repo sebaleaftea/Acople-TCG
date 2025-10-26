@@ -28,7 +28,9 @@ export default function AppNavbar() {
       <header role="banner">
         <div className="brand">
           <img src={logoAcople} alt="Logo Acople TCG" className="logo" />
-          <p className="tagline">Mercado de cartas MTG y Pokémon</p>
+          <p className="tagline">
+            <span className="tagline-text">Mercado de cartas TCG</span>
+          </p>
         </div>
 
         <nav aria-label="Navegación principal">

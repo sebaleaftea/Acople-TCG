@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/home.css";
 import blackLotus from "../assets/images/magicSingles/black-lotus.webp";
 import theOneRing from "../assets/images/magicSingles/the-one-ring-scroll.jpg";
@@ -18,6 +18,15 @@ import blogNinos from "../assets/images/blog-ninos.webp";
 import Ticker from "../Components/Ticker";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [q, setQ] = useState("");
+
+  const onSearchSubmit = useCallback((e) => {
+    e.preventDefault();
+    const term = q.trim();
+    if (!term) return;
+    navigate(`/all-products?query=${encodeURIComponent(term)}`);
+  }, [q, navigate]);
 
   return (
     <main id="contenido" tabIndex="-1">
@@ -28,10 +37,17 @@ const Home = () => {
       <h2 id="home-title">Bienvenido</h2>
       <p className="homepage-tagline">Libera el poder de tus cartas raras, Forja mazos imparables.</p>
 
-      {/* Buscador de cartas */}
-      <form aria-label="Buscador de cartas" data-screen="home">
-        <label htmlFor="q">¿Qué carta buscas hoy?</label>
-        <input id="q" name="q" type="search" placeholder="Black Lotus, Charizard, Planeswalker" />
+      {/* Buscador de cartas y accesorios */}
+  <form aria-label="Buscador de cartas" data-screen="home" onSubmit={onSearchSubmit} className="home-search-form">
+        <label htmlFor="q">¿Qué carta o accesorio buscas hoy?</label>
+        <input
+          id="q"
+          name="q"
+          type="search"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Black Lotus, Charizard, dados, protectores..."
+        />
         <button type="submit">Buscar</button>
       </form>
 

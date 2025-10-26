@@ -1,0 +1,100 @@
+.login-page {
+  display: grid;
+  place-items: start center;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  background: radial-gradient(1200px 800px at 70% -10%, #1f2937 0%, transparent 60%),
+              radial-gradient(900px 700px at -10% 30%, #0ea5b7 0%, transparent 50%),
+              #0b1220;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  margin: 1rem auto;
+  background: #111827;
+  color: #e5e7eb;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(2,6,23,0.45);
+  padding: 1.5rem;
+}
+
+.login-container h2 {
+  margin: 0 0 1rem 0;
+  color: #e5e7eb;
+  text-align: center;
+}
+
+.login-container form {
+  display: grid;
+  gap: 10px;
+}
+
+.login-container label { font-weight: 600; }
+
+.login-container input[type="email"],
+.login-container input[type="password"],
+.login-container input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background: #1f2937;
+  color: #e5e7eb;
+}
+.login-container input::placeholder { color: #9ca3af; }
+.login-container input:focus {
+  outline: 2px solid #22d3ee;
+  outline-offset: 1px;
+  border-color: #22d3ee;
+}
+
+.login-container button[type="submit"] {
+  margin-top: 6px;
+  background: #22d3ee;
+  color: #0b1220;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.login-container button[type="submit"]:hover { background: #67e8f9; }
+
+.toggle {
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.link-btn {
+  background: transparent;
+  color: #22d3ee;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.login-error {
+  color: #fca5a5;
+  font-size: 0.95rem;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  background: #22d3ee;
+  color: #0b1220;
+  border-radius: 6px;
+}

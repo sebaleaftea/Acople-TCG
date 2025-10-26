@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useCart } from "../contexts/useCart";
 
 // Vista de producto genérico pensada para Accesorios
@@ -11,7 +12,7 @@ const ProductPreview = (props) => {
   const nombre = item.nombre || item.name || "Sin nombre";
   const imagen = item.imagen || item.image || "";
   const precio = item.precio ?? item.price ?? 0;
-  const categoria = item.category || item.categoria || item.productType === 'accesorio' ? (item.category || 'accesorio') : undefined;
+  const categoria = item.category || item.categoria || (item.productType === 'accesorio' ? (item.category || 'accesorio') : undefined);
 
   // Dummy discount logic: if category is 'dados' or 'portamazos', show discount
   const hasDiscount = categoria && (categoria === 'dados' || categoria === 'portamazos');
@@ -24,11 +25,22 @@ const ProductPreview = (props) => {
     addToCart(displayName, Number(currentPrice) || 0, imagen);
   };
 
+  const isAccessory = (item.productType || item.type) === 'accesorio' || (!!categoria && categoria !== 'single');
+  const categoryClass = categoria ? `card--cat-${categoria}` : '';
+
   return (
-    <article className="card">
+    <article className={`card ${isAccessory ? 'card--accessory' : ''} ${categoryClass}`}>
       {hasDiscount && <div className="discount-badge">Save {discountPercent}%</div>}
-      <img src={imagen} alt={nombre} />
-      <h3>{nombre}</h3>
+      <Link
+        to={`/detalle-carta/${item.id}`}
+        className="card-link"
+        style={{ textDecoration: 'none', color: 'inherit' }}
+      >
+        <div className="card-media">
+          <img src={imagen} alt={nombre} loading="lazy" decoding="async" />
+        </div>
+        <h3>{nombre}</h3>
+      </Link>
       {categoria && <p>Categoría: {categoria}</p>}
       <div className="price">
         <span className="current">${currentPrice ? Number(currentPrice).toLocaleString() : "-"}</span>

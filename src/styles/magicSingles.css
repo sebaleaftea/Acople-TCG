@@ -94,11 +94,14 @@ main.page-singles {
 /* Grid contenedor de las cartas */
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* Fijas a 240px por tarjeta, filas automáticas y centradas */
+    grid-template-columns: repeat(auto-fill, 240px);
     gap: 1.5rem;
     margin-top: 1rem;
     padding: 1rem;
-    justify-items: center; /* Center cards horizontally */
+    justify-content: center; /* Centra el grid como bloque */
+    justify-items: center;   /* Centra cada tarjeta en su celda */
+    align-items: start;      /* Evita estiramiento vertical */
 }
 
 /* Estilos de cartas dentro del contenedor */
@@ -145,6 +148,44 @@ main.page-singles {
     font-family: 'Rajdhani', sans-serif;
 }
 
+/* Área de imagen fija y centrada para unificar alturas */
+.card .card-media {
+    width: 100%;
+    height: 200px; /* altura estándar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a2b; /* letterbox discreto */
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+.card .card-media img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Ajuste específico para ACCESORIOS: forzar proporción cuadrada y llenar el área */
+.card.card--accessory .card-media {
+    height: auto;          /* dejamos que la altura derive del aspect-ratio */
+    aspect-ratio: 1 / 1;   /* cuadrado consistente entre productos */
+}
+.card.card--accessory .card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     /* llena el cuadro (recorta lo que sobre) */
+}
+
+/* Variante para PLAYMATS: relación 16:9 y sin recorte (contain) */
+.card.card--cat-playmat .card-media {
+    aspect-ratio: 16 / 9;
+}
+.card.card--cat-playmat .card-media img {
+    object-fit: contain;
+}
+
 .price {
     margin: 0.5rem 0;
     font-size: 1rem;
@@ -187,22 +228,18 @@ main.page-singles {
 }
 
 /* Opcional: para pantallas medianas, muestra 2 cartas por fila */
-@media (max-width: 1200px) {
-    .cards-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+/* En pantallas medianas, mantenemos las columnas fijas; no forzamos 2 por fila */
 
 /* Opcional: para pantallas pequeñas, muestra 1 carta por fila */
 @media (max-width: 800px) {
     .cards-grid {
-        grid-template-columns: 1fr;
-        justify-items: center; /* Center cards on mobile */
+        grid-template-columns: 1fr; /* Una columna en mobile */
+        justify-items: center;      /* Centrar cards */
     }
 
     .card {
-        width: 90%; /* Make cards larger on mobile */
-        max-width: 350px; /* Prevent them from being too wide */
+        width: 90%;
+        max-width: 350px;
     }
 }
 

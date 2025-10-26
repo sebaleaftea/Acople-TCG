@@ -98,3 +98,57 @@
 @media (max-width: 480px) {
   .admin-title { font-size: 1.8rem; }
 }
+
+/* Controles reutilizables */
+.admin-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-input {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.admin-input:focus {
+  border-color: #ff6ec4;
+  box-shadow: 0 0 0 3px rgba(255, 110, 196, 0.2);
+}
+
+.admin-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.admin-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.admin-btn-secondary {
+  background: linear-gradient(135deg, #06b6d4, #22d3ee);
+  color: #0b1220;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 10px 20px rgba(34, 211, 238, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.admin-btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(34, 211, 238, 0.35);
+}

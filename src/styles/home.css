@@ -48,18 +48,23 @@
 }
 
 /* Logo de la tienda*/
+/* Make the logo pop more with glow, halo and a subtle pulse */
 .logo {
-    height: 180px;
+    height: 200px;
     width: auto;
     margin: 0 auto;
-    max-width: 250px;
-    filter: drop-shadow(var(--shadow-glow));
-    transition: transform 0.4s ease, filter 0.4s ease;
+    max-width: 280px;
+    border-radius: 14px;
+    box-shadow: 0 0 0 4px rgba(223, 172, 77, 0.55), 0 0 24px rgba(154, 72, 201, 0.55);
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.35));
+    transition: transform 0.4s ease, filter 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    z-index: 1; /* above the halo */
 }
 
 .logo:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 20px rgba(165, 114, 3, 0.9));
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 0 0 5px rgba(223, 172, 77, 0.75), 0 0 36px rgba(154, 72, 201, 0.75);
 }
 
 
@@ -160,7 +165,8 @@
 /* tweaks responsivo*/
 @media (max-width: 700px) {
     .cards-gallery {
-     }
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Typography Updates */
@@ -418,14 +424,72 @@ header[role=banner] .brand {
     align-items: center;
     justify-content: center;
     padding: 40px 20px;
+    position: relative;
+}
+
+/* Animated halo behind the logo */
+header[role=banner] .brand::before {
+    content: "";
+    position: absolute;
+    width: clamp(260px, 40vw, 360px);
+    height: clamp(260px, 40vw, 360px);
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(223,172,77,0.35) 0%, rgba(154,72,201,0.25) 50%, rgba(8,65,92,0.0) 70%);
+    filter: blur(10px);
+    z-index: 0;
+    animation: logoPulse 3.6s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% { transform: scale(0.96); opacity: 0.85; }
+  50% { transform: scale(1.06); opacity: 1; }
 }
 
 /* Tagline */
 header[role=banner] .tagline {
-    font-size: 1.1rem;
-    margin-top: 0.5rem;
-    color: #f5f5f5;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    font-family: var(--font-title);
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-top: 0.75rem;
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(12,12,28,0.42) 0%, rgba(154,72,201,0.18) 50%, rgba(12,12,28,0.42) 100%);
+    border: 1px solid rgba(154,72,201,0.35);
+    box-shadow: 0 0 12px rgba(223,172,77,0.25), inset 0 0 8px rgba(154,72,201,0.18);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6), 0 0 6px rgba(154,72,201,0.45);
+    position: relative;
+}
+
+/* Gradient text inside the pill background */
+header[role=banner] .tagline .tagline-text {
+    color: #fdfdfd;
+    -webkit-text-fill-color: initial;
+    text-transform: uppercase;
+    /* Subtle outline for readability on complex backgrounds */
+    -webkit-text-stroke: 0.5px rgba(8, 65, 92, 0.75);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Animated underline accent */
+header[role=banner] .tagline::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -8px;
+    width: 60%;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #DFAC4D 0%, #9A48C9 50%, #00e0ff 100%);
+    box-shadow: 0 0 10px rgba(223,172,77,0.6), 0 0 18px rgba(154,72,201,0.5);
+    animation: taglineGlow 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes taglineGlow {
+  from { opacity: 0.85; box-shadow: 0 0 8px rgba(223,172,77,0.5), 0 0 14px rgba(154,72,201,0.4); }
+  to   { opacity: 1;    box-shadow: 0 0 14px rgba(223,172,77,0.8), 0 0 22px rgba(154,72,201,0.7); }
 }
 
 /* Nav bar horizontal owo*/
@@ -1879,9 +1943,8 @@ form[aria-label="Buscador de cartas"] button:hover {
         padding: 20px 0;
     }
 
-    .logo {
-        height: 120px;
-    }
+    .logo { height: 140px; max-width: 220px; }
+    header[role=banner] .tagline { font-size: 1.15rem; padding: 6px 12px; }
 
     header[role=banner] .tagline {
         font-size: 0.9rem;

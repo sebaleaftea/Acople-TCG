@@ -9,7 +9,6 @@ import Perfil from "../Pages/Perfil";
 import Configuracion from "../Pages/Configuracion";
 import Productos from "../Pages/productosAcople";
 import AllProducts from "../Pages/allProducts";
-import AdminLogin from "../Pages/AdminLogin";
 import AdminDashboard from "../Pages/AdminDashboard";
 
 const AppRouter = () => {
@@ -21,8 +20,7 @@ const AppRouter = () => {
       <Route path="/detalle-carta/:id" element={<DetalleCarta />} />
       <Route path="/detalle-compra" element={<DetalleCompra />} />
       <Route path="/checkout" element={<DetalleCompra />} />
-      {/* Admin */}
-      <Route path="/admin/login" element={<AdminLogin />} />
+  {/* Admin */}
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/tienda" element={<Tienda />} />
       <Route path="/productos-acople" element={<Productos />} />

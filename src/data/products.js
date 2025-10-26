@@ -121,6 +121,7 @@ export const allProducts = [
   // Enriquecer accesorios con metadatos y campos adicionales
   ...carpetasProducts.map(p => ({
     ...p,
+    productType: 'accesorio',
     stock: Math.floor(Math.random() * 100) + 10,
     grado: 'Nuevo',
     expansion: null,
@@ -129,6 +130,7 @@ export const allProducts = [
   })),
   ...dadosProducts.map(p => ({
     ...p,
+    productType: 'accesorio',
     stock: Math.floor(Math.random() * 100) + 10,
     grado: 'Nuevo',
     expansion: null,
@@ -137,6 +139,7 @@ export const allProducts = [
   })),
   ...playmatProducts.map(p => ({
     ...p,
+    productType: 'accesorio',
     stock: Math.floor(Math.random() * 50) + 5,
     grado: 'Nuevo',
     expansion: null,
@@ -145,6 +148,7 @@ export const allProducts = [
   })),
   ...portamazosProducts.map(p => ({
     ...p,
+    productType: 'accesorio',
     stock: Math.floor(Math.random() * 200) + 20,
     grado: 'Nuevo',
     expansion: null,
@@ -153,6 +157,7 @@ export const allProducts = [
   })),
   ...protectoresProducts.map(p => ({
     ...p,
+    productType: 'accesorio',
     stock: Math.floor(Math.random() * 500) + 50,
     grado: 'Nuevo',
     expansion: null,

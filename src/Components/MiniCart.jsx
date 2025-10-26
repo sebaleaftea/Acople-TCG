@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useCart } from "../contexts/useCart";
 import { Link } from "react-router-dom";
+import { useLoading } from "../contexts/useLoading";
 
 const MiniCart = () => {
   const {
@@ -16,6 +17,7 @@ const MiniCart = () => {
     toast,
     closeToast,
   } = useCart();
+  const { showLoading } = useLoading();
 
   // Cerrar con tecla Escape cuando está abierto
   useEffect(() => {
@@ -90,10 +92,24 @@ const MiniCart = () => {
         <div className="cart-summary">
           <p className="total-price">Total: ${getTotal().toLocaleString()} CLP</p>
           <div className="cart-actions">
-            <Link to="/detalle-compra" onClick={closeCart} className="view-cart">
+            <Link
+              to="/detalle-compra"
+              onClick={() => {
+                showLoading({ message: "Cargando...", duration: 5000 });
+                closeCart();
+              }}
+              className="view-cart"
+            >
               View Cart
             </Link>
-            <Link to="/detalle-compra" onClick={closeCart} className="checkout">
+            <Link
+              to="/detalle-compra"
+              onClick={() => {
+                showLoading({ message: "Cargando...", duration: 5000 });
+                closeCart();
+              }}
+              className="checkout"
+            >
               Checkout
             </Link>
           </div>
