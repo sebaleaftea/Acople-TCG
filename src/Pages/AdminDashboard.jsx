@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../Api/axios'; // Usamos Api con mayúscula según tu estructura
+import Pagination from '../Components/Pagination';
 import '../styles/admin.css';
 import '../styles/home.css';
 
@@ -17,16 +18,20 @@ const AdminDashboard = () => {
 
   // Estados del Modal "Agregar"
   const [isAddOpen, setIsAddOpen] = useState(false);
-  const [addForm, setAddForm] = useState({ 
-    nombre: '', 
+  const [addForm, setAddForm] = useState({
+    nombre: '',
     slug: '',
-    stock: 0, 
+    stock: 0,
     precio: 0,
     descripcion: '',
     category: 'single', // Valor por defecto
     game: 'magic'       // Valor por defecto
   });
   const [addError, setAddError] = useState('');
+
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
 
   // 1. Cargar productos desde el Backend Java
   const fetchProducts = async () => {
@@ -176,6 +181,13 @@ const AdminDashboard = () => {
     }));
   };
 
+  // Pagination logic
+  const indexOfLastRow = currentPage * itemsPerPage;
+  const indexOfFirstRow = indexOfLastRow - itemsPerPage;
+  const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <main className="admin-main">
       <header className="admin-header">
@@ -203,6 +215,7 @@ const AdminDashboard = () => {
         {loading ? (
             <p>Cargando inventario...</p>
         ) : (
+            <>
             <div className="admin-table-wrapper">
             <table className="admin-table">
                 <thead>
@@ -221,7 +234,7 @@ const AdminDashboard = () => {
                 {rows.length === 0 && (
                     <tr><td colSpan="8" style={{textAlign: 'center', padding: '2rem'}}>No hay productos en la base de datos.</td></tr>
                 )}
-                {rows.map(r => (
+                {currentRows.map(r => (
                     <tr key={r.id}>
                     <td>{r.id}</td>
                     <td>
@@ -368,6 +381,15 @@ const AdminDashboard = () => {
                 </tbody>
             </table>
             </div>
+            {!loading && rows.length > 0 && (
+              <Pagination
+                cardsPerPage={itemsPerPage}
+                totalCards={rows.length}
+                paginate={paginate}
+                currentPage={currentPage}
+              />
+            )}
+            </>
         )}
       </section>
 

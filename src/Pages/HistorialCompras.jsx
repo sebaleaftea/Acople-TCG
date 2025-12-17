@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import api from '../Api/axios';
 import { useAuth } from '../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import { useLoading } from '../contexts/useLoading';
+import Pagination from '../Components/Pagination';
 import '../styles/historial.css'; // We will create this file next
 
 const HistorialCompras = () => {
     const [orders, setOrders] = useState([]);
     const [error, setError] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5; // Show 5 orders per page
     const { user, isLoggedIn } = useAuth();
     const { showLoading, hideLoading } = useLoading();
 
@@ -42,6 +46,30 @@ const HistorialCompras = () => {
         fetchOrders();
     }, [user, isLoggedIn, showLoading, hideLoading]);
 
+    // Filter orders based on search query
+    const filteredOrders = useMemo(() => {
+        if (!searchQuery.trim()) return orders;
+
+        const query = searchQuery.toLowerCase();
+        return orders.filter(order =>
+            order.items?.some(item =>
+                item.product?.name?.toLowerCase().includes(query)
+            )
+        );
+    }, [orders, searchQuery]);
+
+    // Pagination logic
+    const indexOfLastOrder = currentPage * itemsPerPage;
+    const indexOfFirstOrder = indexOfLastOrder - itemsPerPage;
+    const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // Reset to page 1 when search changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchQuery]);
+
     if (!isLoggedIn) {
         return (
             <main className="historial-main-unauthorized">
@@ -58,6 +86,19 @@ const HistorialCompras = () => {
             <div className="historial-container">
                 <h1 className="historial-title">Mi Historial de Compras</h1>
 
+                {/* Search Input */}
+                {orders.length > 0 && (
+                    <div className="historial-search">
+                        <input
+                            type="text"
+                            placeholder="Buscar por nombre de producto..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="historial-search-input"
+                        />
+                    </div>
+                )}
+
                 {error && <p className="historial-error">{error}</p>}
 
                 {orders.length === 0 && !error && (
@@ -68,37 +109,49 @@ const HistorialCompras = () => {
                 )}
 
                 {orders.length > 0 && (
-                    <div className="orders-list">
-                        {orders.map(order => (
-                            <div key={order.id} className="order-card">
-                                <div className="order-card-header">
-                                    <div className="order-info">
-                                        <span className="order-info-label">Fecha del Pedido</span>
-                                        <span className="order-info-value">{new Date(order.orderDate).toLocaleDateString()}</span>
+                    <>
+                        <div className="orders-list">
+                            {currentOrders.map(order => (
+                                <div key={order.id} className="order-card">
+                                    <div className="order-card-header">
+                                        <div className="order-info">
+                                            <span className="order-info-label">Fecha del Pedido</span>
+                                            <span className="order-info-value">{new Date(order.orderDate).toLocaleDateString()}</span>
+                                        </div>
+                                        <div className="order-info">
+                                            <span className="order-info-label">Total</span>
+                                            <span className="order-info-value">${Number(order.totalAmount).toLocaleString('es-CL')}</span>
+                                        </div>
+                                        <div className="order-info">
+                                            <span className="order-info-label">Estado</span>
+                                            <span className={`order-status status-${order.status?.toLowerCase()}`}>{order.status}</span>
+                                        </div>
                                     </div>
-                                    <div className="order-info">
-                                        <span className="order-info-label">Total</span>
-                                        <span className="order-info-value">${Number(order.totalAmount).toLocaleString('es-CL')}</span>
-                                    </div>
-                                    <div className="order-info">
-                                        <span className="order-info-label">Estado</span>
-                                        <span className={`order-status status-${order.status?.toLowerCase()}`}>{order.status}</span>
+                                    <div className="order-items-summary">
+                                        <h4 className="order-items-title">Artículos en este pedido</h4>
+                                        <ul className="order-items-list">
+                                            {order.items?.map(item => (
+                                                <li key={item.id} className="order-item-detail">
+                                                    <span>{item.product?.name || 'Producto no disponible'}</span>
+                                                    <span>({item.quantity} x ${Number(item.price).toLocaleString('es-CL')})</span>
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 </div>
-                                <div className="order-items-summary">
-                                    <h4 className="order-items-title">Artículos en este pedido</h4>
-                                    <ul className="order-items-list">
-                                        {order.items?.map(item => (
-                                            <li key={item.id} className="order-item-detail">
-                                                <span>{item.product?.name || 'Producto no disponible'}</span>
-                                                <span>({item.quantity} x ${Number(item.price).toLocaleString('es-CL')})</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+
+                        {/* Pagination */}
+                        {filteredOrders.length > itemsPerPage && (
+                            <Pagination
+                                cardsPerPage={itemsPerPage}
+                                totalCards={filteredOrders.length}
+                                paginate={paginate}
+                                currentPage={currentPage}
+                            />
+                        )}
+                    </>
                 )}
             </div>
         </main>

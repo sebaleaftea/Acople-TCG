@@ -3,7 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import Filter from "../Components/Filter";
 import CardPreview from "../Components/CardPreview";
 import ProductPreview from "../Components/ProductPreview";
-import { useProducts } from "../contexts/ProductContext"; // <-- 1. IMPORT
+import Pagination from "../Components/Pagination";
+import { useProducts } from "../hooks/useProducts"; // <-- 1. IMPORT
 import '../styles/magicSingles.css';
 
 const normalizeType = (t) => {
@@ -15,11 +16,15 @@ const normalizeType = (t) => {
 };
 
 const AllProducts = () => {
-  const { products, isLoading } = useProducts(); 
-  
+  const { products, isLoading } = useProducts();
+
   const [filtered, setFiltered] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
 
   const handleFilter = useCallback((filters) => {
     let items = products.slice();
@@ -74,7 +79,15 @@ const AllProducts = () => {
 
   useEffect(() => {
     handleFilter(urlFilters);
+    setCurrentPage(1); // Reset to first page when filters change
   }, [urlFilters, handleFilter]);
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filtered.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
@@ -99,7 +112,7 @@ const AllProducts = () => {
             {isLoading ? (
               <p>Cargando productos...</p>
             ) : (
-              filtered.map(item => (
+              currentItems.map(item => (
                 item.productType === 'single' ? (
                   <CardPreview key={item.id} card={item} />
                 ) : (
@@ -108,6 +121,15 @@ const AllProducts = () => {
               ))
             )}
           </div>
+
+          {!isLoading && filtered.length > 0 && (
+            <Pagination
+              cardsPerPage={itemsPerPage}
+              totalCards={filtered.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          )}
 
           {filtered.length === 0 && !isLoading && (
              <p style={{textAlign: 'center', width: '100%'}}>No se encontraron productos.</p>

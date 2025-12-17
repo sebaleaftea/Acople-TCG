@@ -1,6 +1,8 @@
 import React from 'react';
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({ cardsPerPage, totalCards, paginate, currentPage }) => {
+  const totalPages = Math.ceil(totalCards / cardsPerPage);
+
   if (totalPages <= 1) return null;
 
   const pages = [];
@@ -9,9 +11,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '20px' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '20px', marginBottom: '20px' }}>
       <button
-        onClick={() => onPageChange(currentPage - 1)}
+        onClick={() => paginate(currentPage - 1)}
         disabled={currentPage === 1}
         style={{
           padding: '8px 12px',
@@ -27,7 +29,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       {pages.map(page => (
         <button
           key={page}
-          onClick={() => onPageChange(page)}
+          onClick={() => paginate(page)}
           style={{
             padding: '8px 12px',
             background: page === currentPage ? '#CC2936' : '#08415C',
@@ -41,7 +43,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         </button>
       ))}
       <button
-        onClick={() => onPageChange(currentPage + 1)}
+        onClick={() => paginate(currentPage + 1)}
         disabled={currentPage === totalPages}
         style={{
           padding: '8px 12px',
