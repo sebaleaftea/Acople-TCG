@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ErrorModal from "../Components/ErrorModal";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
 import { auth, isConfigured, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "../firebase";
@@ -123,7 +124,8 @@ const Login = () => {
                             required
                         />
 
-                        {error && <div className="login-error">{error}</div>}
+                        {/* Modal de error */}
+                        <ErrorModal message={error} onClose={() => setError("")} />
                         <button type="submit">Ingresar</button>
                     </form>
                     <div className="toggle">
@@ -181,7 +183,8 @@ const Login = () => {
                             required
                         />
 
-                        {error && <div className="login-error">{error}</div>}
+                        {/* Modal de error */}
+                        <ErrorModal message={error} onClose={() => setError("")} />
                         <button type="submit">Crear cuenta</button>
                     </form>
                     <div className="toggle">
