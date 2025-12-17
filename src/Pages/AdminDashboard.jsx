@@ -33,6 +33,9 @@ const AdminDashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
 
+  // Estado para búsqueda
+  const [search, setSearch] = useState('');
+
   // 1. Cargar productos desde el Backend Java
   const fetchProducts = async () => {
     try {
@@ -181,10 +184,18 @@ const AdminDashboard = () => {
     }));
   };
 
+  // Filtrado por nombre o slug
+  const filteredRows = search.trim()
+    ? rows.filter(r =>
+        r.nombre.toLowerCase().includes(search.trim().toLowerCase()) ||
+        r.slug.toLowerCase().includes(search.trim().toLowerCase())
+      )
+    : rows;
+
   // Pagination logic
   const indexOfLastRow = currentPage * itemsPerPage;
   const indexOfFirstRow = indexOfLastRow - itemsPerPage;
-  const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
+  const currentRows = filteredRows.slice(indexOfFirstRow, indexOfLastRow);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -202,11 +213,20 @@ const AdminDashboard = () => {
 
       {error && <div className="error-message" style={{marginBottom: '1rem'}}>{error}</div>}
 
+
       <section className="admin-card">
-        <div className="admin-toolbar">
-          <h2 className="admin-section-title admin-section-title-margin">
+        <div className="admin-toolbar" style={{ flexWrap: 'wrap', gap: 12 }}>
+          <h2 className="admin-section-title admin-section-title-margin" style={{ margin: 0 }}>
             Inventario (Backend Java)
           </h2>
+          <input
+            type="text"
+            placeholder="Buscar por nombre o slug..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            className="admin-input"
+            style={{ minWidth: 180, maxWidth: 260 }}
+          />
           <button className="admin-btn-secondary" onClick={() => setIsAddOpen(true)}>
             + Agregar Producto
           </button>
