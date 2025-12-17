@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import api from '../Api/axios';
 import { getImageBySlug } from '../utils/imageMapper';
 
@@ -61,3 +61,11 @@ export const ProductProvider = ({ children }) => {
         </ProductContext.Provider>
     );
 };
+
+// 2. Create a custom hook for easy consumption
+export const useProducts = () => {
+    return useContext(ProductContext);
+};
+
+// Export the context as default for compatibility
+export default ProductContext;
