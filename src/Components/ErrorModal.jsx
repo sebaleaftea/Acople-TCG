@@ -3,6 +3,8 @@ import "../styles/ErrorModal.css";
 
 const ErrorModal = ({ message, onClose }) => {
   if (!message) return null;
+  // Depuración visual para asegurar renderizado
+  console.log("ErrorModal renderizado con mensaje:", message);
   return (
     <div className="error-modal-overlay">
       <div className="error-modal">
