@@ -1,0 +1,42 @@
+.error-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.error-modal {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  text-align: center;
+  min-width: 300px;
+}
+
+.error-modal h2 {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+}
+
+.error-modal button {
+  background: #d32f2f;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.error-modal button:hover {
+  background: #b71c1c;
+}
